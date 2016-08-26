@@ -5,8 +5,12 @@ class Api::BenchesController < ApplicationController
   end
 
   def show
-    @bench = Bench.find(params[:id])
-    render :show
+    @bench = Bench.find_by(id: params[:id])
+    if @bench
+      render :show
+    else
+      render json: {errors: ["It doesn't exists"] }
+    end
   end
 
   def create
@@ -14,7 +18,7 @@ class Api::BenchesController < ApplicationController
     if @bench.save
       render :show
     else
-      render json: @bench.errors.full_messages
+      render json: { errors: @bench.errors.full_messages }
     end
   end
 
