@@ -9,7 +9,12 @@ const BenchesMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case BenchConstants.REQUEST_BENCHES:
-      Util.fetchBenches(fetchSuccessCallback);
+      let filters = {
+        northEast: {lat: 37.80971, lng: -122.39208},
+        southWest: {lat: 37.74187, lng: -122.47791}
+      };
+
+      Util.fetchBenches(filters, fetchSuccessCallback);
       break;
     default:
       return next(action);
