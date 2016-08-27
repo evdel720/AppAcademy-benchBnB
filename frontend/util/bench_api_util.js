@@ -2,7 +2,7 @@ const fetchBenches = (filters, success) => {
   $.ajax({
     url: '/api/benches.json',
     type: 'GET',
-    data: { bounds: filters },
+    data: filters,
     success,
     error: () => console.log('error')
   });

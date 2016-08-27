@@ -1,4 +1,5 @@
-import { BenchConstants, receiveBenches } from '../actions/bench_actions';
+import { BenchConstants, requestBenches, receiveBenches } from '../actions/bench_actions';
+import { FilterConstants } from '../actions/filter_actions';
 import * as Util from '../util/bench_api_util';
 
 const BenchesMiddleware = (store) => (next) => (action) => {
@@ -9,12 +10,11 @@ const BenchesMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case BenchConstants.REQUEST_BENCHES:
-      let filters = {
-        northEast: {lat: 37.80971, lng: -122.39208},
-        southWest: {lat: 37.74187, lng: -122.47791}
-      };
-
-      Util.fetchBenches(filters, fetchSuccessCallback);
+      Util.fetchBenches(store.getState().filters, fetchSuccessCallback);
+      break;
+    case FilterConstants.UPDATE_BOUNDS:
+      next(action);
+      store.dispatch(requestBenches());
       break;
     default:
       return next(action);

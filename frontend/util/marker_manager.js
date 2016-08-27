@@ -10,19 +10,35 @@ class MarkerManager {
     this._benchesToAdd(benches).forEach((bench) => {
       this.createMarkerFromBench(bench);
     });
+    this._markersToRemove(benches).forEach((marker) => {
+      this._removeMarker(marker);
+    });
+  }
+
+  _markersToRemove(benches) {
+    let benchIds = selectBenches(benches).map((b) => b.id);
+    // let benchIds = Object.keys(benches)
+    return this.markers.filter((m) => (!benchIds.includes(m.benchId)));
+  }
+
+  _removeMarker(marker) {
+    marker.setMap(null);
   }
 
   _benchesToAdd(benches) {
-    return selectBenches(benches).filter((bench) => (!this.markers.includes(bench)));
+    let benchesInMap = this.markers.map((m) => (m.benchId));
+    benches = selectBenches(benches);
+    return benches.filter((b) => !benchesInMap.includes(b));
   }
 
   createMarkerFromBench(bench) {
-    new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: {lat: bench.lat, lng: bench.lng },
       map: this.map,
-      title: bench.description
+      title: bench.description,
+      benchId: bench.id
     });
-    this.markers.push(bench);
+    this.markers.push(marker);
   }
 }
 
