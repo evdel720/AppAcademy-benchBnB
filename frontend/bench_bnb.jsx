@@ -11,7 +11,10 @@ window.receiveBenches = Action.receiveBenches;
 
 document.addEventListener("DOMContentLoaded", () => {
   let preloadedState = {
-    benches: {}
+    benches: {},
+    filters: {
+      bounds: {}
+    }
   };
   const store = window.store = configureStore(preloadedState);
   const root = document.getElementById('root');
