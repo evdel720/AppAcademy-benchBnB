@@ -9,7 +9,8 @@ class Api::BenchesController < ApplicationController
     if @bench
       render :show
     else
-      render json: {errors: ["It doesn't exists"] }
+      @errors = ["It doesn't exists"]
+      render :errors
     end
   end
 
@@ -18,7 +19,8 @@ class Api::BenchesController < ApplicationController
     if @bench.save
       render :show
     else
-      render json: { errors: @bench.errors.full_messages }
+      @errors = @bench.errors.full_messages
+      render :errors
     end
   end
 
