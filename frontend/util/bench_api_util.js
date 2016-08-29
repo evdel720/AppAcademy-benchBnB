@@ -3,9 +3,18 @@ const fetchBenches = (filters, success) => {
     url: '/api/benches.json',
     type: 'GET',
     data: filters,
-    success,
-    error: () => console.log('error')
+    success
   });
 };
 
-export { fetchBenches };
+const createBench = (bench, success, errors) => {
+  $.ajax({
+    url: '/api/benches.json',
+    type: 'POST',
+    data: {bench: bench},
+    success,
+    errors
+  });
+};
+
+export { fetchBenches, createBench };

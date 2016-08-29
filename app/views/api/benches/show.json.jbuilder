@@ -1,1 +1,1 @@
-json.extract! @bench, :description, :lat, :lng, :seats, :id
+json.set! bench.id, bench, :id, :description, :lat, :lng, :seats

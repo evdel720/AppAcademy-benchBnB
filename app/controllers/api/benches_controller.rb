@@ -10,7 +10,7 @@ class Api::BenchesController < ApplicationController
       render :show
     else
       @errors = ["It doesn't exists"]
-      render :errors
+      render './errors'
     end
   end
 
@@ -20,13 +20,13 @@ class Api::BenchesController < ApplicationController
       render :show
     else
       @errors = @bench.errors.full_messages
-      render :errors
+      render './errors'
     end
   end
 
   private
 
   def bench_params
-    params.require(:bench).permit(:description, :lat, :lng)
+    params.require(:bench).permit(:description, :lat, :lng, :seats)
   end
 end

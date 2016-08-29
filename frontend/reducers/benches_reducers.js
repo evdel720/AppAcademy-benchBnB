@@ -8,6 +8,8 @@ const BenchesReducer = (state = defaultState, action) => {
   switch (action.type) {
     case BenchConstants.RECEIVE_BENCHES:
       return action.benches;
+    case BenchConstants.RECEIVE_BENCHE:
+      return merge({}, state, action.bench);
     default:
       return state;
   }
