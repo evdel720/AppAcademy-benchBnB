@@ -11,11 +11,16 @@ window.signOut = Action.signOut;
 
 document.addEventListener("DOMContentLoaded", () => {
   let preloadedState = {
+    session: {
+      currentUser: undefined,
+      errors: {}
+    },
     benches: {},
-    filters: {
-      bounds: {}
-    }
+    filters: {}
   };
+  if (window.currentUser) {
+    preloadedState = {session: {currentUser: window.currentUser}};
+  }
   const store = window.store = configureStore(preloadedState);
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store}/>, root);
