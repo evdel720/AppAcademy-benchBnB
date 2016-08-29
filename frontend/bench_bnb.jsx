@@ -4,10 +4,10 @@ import configureStore from './store/store';
 import Root from './components/root';
 
 
-import * as Action from './actions/bench_actions';
-window.requestBenches = Action.requestBenches;
-window.receiveBenches = Action.receiveBenches;
-
+import * as Action from './actions/session_actions';
+window.signIn = Action.signIn;
+window.signUp = Action.signUp;
+window.signOut = Action.signOut;
 
 document.addEventListener("DOMContentLoaded", () => {
   let preloadedState = {
