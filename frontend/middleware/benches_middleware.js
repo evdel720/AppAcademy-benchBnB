@@ -22,7 +22,7 @@ const BenchesMiddleware = (store) => (next) => (action) => {
     case BenchConstants.REQUEST_BENCHES:
       Util.fetchBenches(store.getState().filters, fetchSuccessCallback);
       break;
-    case FilterConstants.UPDATE_BOUNDS:
+    case FilterConstants.UPDATE_FILTER:
       next(action);
       store.dispatch(requestBenches());
       break;

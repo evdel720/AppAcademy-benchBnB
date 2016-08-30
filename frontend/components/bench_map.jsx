@@ -23,7 +23,7 @@ class BenchMap extends React.Component {
         lng: mapObject.getSouthWest().lng()
       };
 
-      this.props.updateBounds({
+      this.props.updateFilter('bounds', {
         northEast, southWest
       });
     });
